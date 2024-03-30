@@ -1,0 +1,10 @@
+name: my-ide
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: simple project template
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: https://www.pulumi.com/ai/api/project/8cbd8040-6914-4dae-80ea-1d232678709c.zip
