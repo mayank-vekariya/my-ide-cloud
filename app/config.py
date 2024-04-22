@@ -2,11 +2,6 @@
 import os
 
 class Config:
-    SECRET_KEY = os.getenv('SECRET_KEY', 'your_secret_key_here')
-    PUBLIC_IP_ADDRESS = '34.123.45.67'
-    DBNAME = 'your_database_name'
-    USER = 'your_username'
-    PASSWORD = 'your_password'
-    # Example for PostgreSQL
-    SQLALCHEMY_DATABASE_URI = f'postgresql://{USER}:{PASSWORD}@{PUBLIC_IP_ADDRESS}/{DBNAME}'
+    SECRET_KEY = '94724552428d304772ad89fdb6df9a21'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
