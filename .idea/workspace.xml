@@ -5,18 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d251bfbe-efd4-463e-afc3-3f099da23ddc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/create_db.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/js/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/auth/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/auth/register.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/layouts/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instance/site.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/main/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/cfa26bb3-6240-4acc-90f6-d62cc7f5ecc8.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/cfa26bb3-6240-4acc-90f6-d62cc7f5ecc8.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/auth/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/auth/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/site.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +28,17 @@
         <option value="JavaScript File" />
         <option value="HTML File" />
       </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
     </option>
   </component>
   <component name="Git.Settings">
@@ -145,6 +152,7 @@
       <workItem from="1713732784898" duration="410000" />
       <workItem from="1713733612753" duration="7706000" />
       <workItem from="1713815499503" duration="2000" />
+      <workItem from="1713831161796" duration="2926000" />
     </task>
     <servers />
   </component>
@@ -153,6 +161,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/my_ide_cloud$create_db.coverage" NAME="create_db Coverage Results" MODIFIED="1713744687647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
-    <SUITE FILE_PATH="coverage/my_ide_cloud$run.coverage" NAME="run Coverage Results" MODIFIED="1713761116785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/my_ide_cloud$run.coverage" NAME="run Coverage Results" MODIFIED="1713870873552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
