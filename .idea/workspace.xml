@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d251bfbe-efd4-463e-afc3-3f099da23ddc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/templates/main/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/cfa26bb3-6240-4acc-90f6-d62cc7f5ecc8.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/cfa26bb3-6240-4acc-90f6-d62cc7f5ecc8.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/auth/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/auth/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/site.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +144,7 @@
       <workItem from="1713732784898" duration="410000" />
       <workItem from="1713733612753" duration="7706000" />
       <workItem from="1713815499503" duration="2000" />
-      <workItem from="1713831161796" duration="2926000" />
+      <workItem from="1713831161796" duration="3982000" />
     </task>
     <servers />
   </component>
