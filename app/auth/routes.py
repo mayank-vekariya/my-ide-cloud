@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash
 from app.models import User, db
 from app.auth.forms import RegistrationForm, LoginForm
 from werkzeug.security import check_password_hash
+
 auth_bp = Blueprint('auth', __name__, template_folder='templates/auth')
 
 
@@ -30,7 +31,7 @@ def login():
         if user and check_password_hash(user.password, form.password.data):
             login_user(user, remember=True)
             flash('You have been logged in!', 'success')
-            return redirect(url_for('main.home'))
+            return redirect(url_for('main.dashboard'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('auth/login.html', title='Login', form=form)
