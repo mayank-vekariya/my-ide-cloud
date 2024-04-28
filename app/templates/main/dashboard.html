@@ -3,18 +3,22 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-    <h1>Dashboard</h1>
-    <div>
-        <a href="{{ url_for('main.create_project') }}">Create New Project</a>
-        <a href="{{ url_for('main.clone_project') }}">Clone Project from GitHub</a>
-    </div>
-    <ul>
-        {% for project in projects %}
-            <li>
-                {{ project.name }}
-                <a href="{{ url_for('main.open_project', project_id=project.id) }}">Open</a>
-                <a href="{{ url_for('main.delete_project', project_id=project.id) }}">Delete</a>
-            </li>
-        {% endfor %}
-    </ul>
+<h1>Dashboard</h1>
+<div>
+    <a href="{{ url_for('main.create_project') }}">Create New Project</a>
+    <a href="{{ url_for('main.clone_project') }}">Clone Project from GitHub</a>
+</div>
+{% if projects %}
+<ul>
+    {% for project in projects %}
+    <li>
+        {{ project.name }}
+        <a href="{{ url_for('main.open_project', project_id=project.id) }}">Open</a>
+        <a href="{{ url_for('main.delete_project', project_id=project.id) }}">Delete</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No projects found. Start by creating a new project.</p>
+{% endif %}
 {% endblock %}
