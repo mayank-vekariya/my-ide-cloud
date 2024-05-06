@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Home - UTA Code Server{% endblock %}
+
+{% block content %}
+<div class="container my-5 container text-center">
+    <div class="row">
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+            <img src="path_to_diagram.gif" alt="Flowchart Diagram" class="img-fluid">
+        </div>
+        <div class="col-md-6 text-center d-flex flex-column justify-content-center">
+            <h1>Welcome to UTA Code Server</h1>
+            <p>This platform facilitates streamlined code deployment and management.</p>
+            <ul>
+                <li>Deploy directly from your GitHub repositories.</li>
+                <li>Manage deployments with automated tools.</li>
+                <li>Access and manage projects efficiently.</li>
+            </ul>
+            <div class="container px-4 text-center">
+              <div class="row gx-5">
+                <div class="col">
+                 <div class="p-3">
+                     <a href="/login" class="btn btn-primary">Login</a>
+                 </div>
+                </div>
+                <div class="col">
+                  <div class="p-3">
+                      <a href="/register" class="btn btn-secondary">Register</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}

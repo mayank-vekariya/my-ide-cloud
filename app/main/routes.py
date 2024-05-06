@@ -2,13 +2,19 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request,
 from flask_login import current_user, login_required
 from app.models import Project, db
 import subprocess
-import shlex
+import json
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
 
 main_bp = Blueprint('main', __name__, template_folder='templates/main')
 
+
 @main_bp.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('main/index.html')
+
 
 @main_bp.route('/dashboard')
 @login_required
@@ -16,83 +22,80 @@ def dashboard():
     projects = Project.query.filter_by(user_id=current_user.id).all()
     return render_template('main/dashboard.html', projects=projects)
 
-import subprocess
-import logging
-
-# Set up basic configuration for logging
-logging.basicConfig(level=logging.INFO)
+def format_service_name(repo_url):
+    """Simple helper to format GitHub repository URL into a service name compliant with Google Cloud Run constraints."""
+    service_name = repo_url.split('/')[-1].replace('_', '-').lower()
+    if not service_name[0].isalpha():
+        service_name = 'a' + service_name
+    return service_name[:49]  # Ensure service name is within the character limit
 
 def run_command(command):
-    """Run a shell command and yield output lines using a safer approach with detailed logging."""
-    logging.info(f"Executing command: {command}")
-    try:
-        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, text=True)
-        for line in process.stdout:
-            logging.info(f"Output: {line.strip()}")
-            yield line
-        process.wait()
-        if process.returncode != 0:
-            # Log stderr if the process failed
-            err = process.stderr.read()
-            logging.error(f"Error: {err.strip()}")
-            yield f"Error: {err.strip()}"
-    except Exception as e:
-        logging.error(f"Exception during command execution: {str(e)}")
-        yield f"Exception: {str(e)}"
+    """Execute a shell command and capture its output."""
+    logging.info(f"Running command: {command}")
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, text=True)
+    output, error = process.communicate()
+    return output.strip(), error.strip(), process.returncode
 
-@main_bp.route('/deploy', methods=['POST'])
-def deploy():
-    github_repo = request.form.get('github_repo')
-    command = f"gcloud run deploy my-service --image gcr.io/ide-cloud/my-code-server --update-env-vars GITHUB_REPO={github_repo} --platform managed --region us-central1 --allow-unauthenticated"
-    def generate():
-        for output in run_command(command):
-            yield f"data:{output}\n\n"
-        yield "data:Deployment completed successfully!\n\n"
-    return Response(generate(), mimetype='text/event-stream')
-
-
-
-@main_bp.route('/clone_project', methods=['GET', 'POST'])
-@login_required
-def clone_project():
-    if request.method == 'POST':
-        github_repo = request.form['github_repo']
-        try:
-            deploy_to_cloud_run(github_repo)
-            flash('Deployment initiated successfully!', 'success')
-        except subprocess.CalledProcessError as e:
-            flash(f'Failed to initiate deployment: {str(e)}', 'error')
-        return redirect(url_for('main.dashboard'))
-    return render_template('main/clone_project.html')
-
-def deploy_to_cloud_run(github_repo):
-    gcloud_path = "C:\\Program Files (x86)\\Google\\Cloud SDK\\google-cloud-sdk\\bin"  # Full path to gcloud
-    project_id = "ide-cloud"
-    service_name = "my-code-server"
-    image_url = f"gcr.io/{project_id}/{service_name}"
+def deploy_service_cli(service_name, github_repo):
+    """Deploy a new service to Google Cloud Run using gcloud CLI commands."""
+    image_url = "gcr.io/ide-cloud/my-code-server"
+    project_id = "your-google-cloud-project-id"
     region = "us-central1"
-    command = [
-        gcloud_path, "run", "deploy", service_name,
-        "--image", image_url,
-        "--update-env-vars", f"GITHUB_REPO={github_repo}",
-        "--platform", "managed",
-        "--region", region,
-        "--allow-unauthenticated"
-    ]
-    subprocess.run(command, check=True)
+    env_var = f"GITHUB_REPO={github_repo}"
+    command = f"gcloud run deploy {service_name} --image {image_url} --update-env-vars {env_var} --platform managed --region {region} --allow-unauthenticated --format=json"
+    output, error, exit_code = run_command(command)
+    if exit_code == 0:
+        return output  # JSON output from gcloud command
+    else:
+        logging.error(f"Error deploying service: {error}")
+        return json.dumps({"error": error})
+
+@main_bp.route('/deploy_git', methods=['POST'])
+def deploy_from_git():
+    github_repo = request.form.get('github_repo')
+    service_name = format_service_name(github_repo)
+    logging.info(f"Deploying GitHub repo {github_repo} as {service_name}")
+
+    # Call the CLI deployment function
+    result = deploy_service_cli(service_name, github_repo)
+    print(result)
+
+    # Process the result
+    try:
+        result_json = json.loads(result)
+        if 'error' in result_json:
+            flash(f"Deployment failed: {result_json['error']}", 'error')
+        else:
+            # Ensure that we are providing all necessary fields expected by the Project model
+            new_project = Project(
+                user_id=current_user.id,
+                github_url=github_repo,
+                s3_url=None,  # Assuming there is no S3 URL at this point
+                status='deployed',  # Adjust based on actual deployment status
+                url = result_json.get('status', {}).get('url'),  # Assuming the deployment result includes a URL; adjust as necessary
+                project_name=service_name
+            )
+            db.session.add(new_project)
+            db.session.commit()
+            flash('Deployment initiated successfully!', 'success')
+    except json.JSONDecodeError as e:
+        flash(f"Failed to parse deployment results: {str(e)}", 'error')
+
+    return redirect(url_for('main.dashboard'))
 
 
-@main_bp.route('/create_project', methods=['GET', 'POST'])
+
+@main_bp.route('/view_container/<int:id>', methods=['GET'])
 @login_required
-def create_project():
-    if request.method == 'POST':
-        project_name = request.form['project_name']
-        new_project = Project(name=project_name, user_id=current_user.id)
-        db.session.add(new_project)
-        db.session.commit()
-        flash('Project created successfully!', 'success')
-        return redirect(url_for('main.dashboard'))
-    return render_template('main/create_project.html')
-import logging
+def view_container(id):
+    project = Project.query.get_or_404(id)
+    return render_template('main/view_container.html', project=project)
 
-
+@main_bp.route('/delete_container/<int:id>', methods=['POST'])
+@login_required
+def delete_container(id):
+    project = Project.query.get_or_404(id)
+    db.session.delete(project)
+    db.session.commit()
+    flash('Project deleted successfully!', 'success')
+    return redirect(url_for('main.dashboard'))

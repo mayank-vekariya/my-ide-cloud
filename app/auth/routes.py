@@ -36,10 +36,4 @@ def login():
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('auth/login.html', title='Login', form=form)
 
-@auth_bp.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('main.home'))
-@auth_bp.route('/test')
-def test():
-    return "This is a test route."
+
