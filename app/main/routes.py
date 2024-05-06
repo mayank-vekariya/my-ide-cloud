@@ -89,7 +89,7 @@ def deploy_from_git():
 @login_required
 def view_container(id):
     project = Project.query.get_or_404(id)
-    return render_template('view_container.html', project=project)
+    return render_template('main/view_container.html', project=project)
 
 @main_bp.route('/delete_container/<int:id>', methods=['POST'])
 @login_required
