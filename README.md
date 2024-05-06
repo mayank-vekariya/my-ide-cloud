@@ -10,27 +10,6 @@ The IDE Cloud Platform is designed to lower the barriers traditionally associate
 - **Accessibility**: The platform supports access from various devices, enabling developers to use even older hardware or mobile devices to manage their projects.
 - **Innovation in Development**: Reflecting the future of cloud computing, where heavy lifting is done on the server side, this project allows developers to focus more on coding and less on the configuration.
 - **Scalability**: Built on Google Cloud Run, the project harnesses the power of containerization, ensuring that applications scale effortlessly with demand.
-
-## Visuals
-
-To better understand the architecture and workflow of the IDE Cloud Platform, here are several diagrams illustrating its structure and operational flow:
-
-### Cloud Architecture Diagram
-This diagram displays the complete cloud setup, detailing the interactions between the Flask-based backend, Google Cloud Run, and other cloud services.
-
-![Cloud Architecture Diagram](URL_TO_CLOUD_ARCHITECTURE_DIAGRAM)
-
-### Entity Relationship Diagram
-Shows the relationship between different data entities stored and managed in the cloud database.
-
-![Entity Relationship Diagram](URL_TO_ER_DIAGRAM)
-
-### Sequential Diagram
-Illustrates the sequence of operations or processes in the deployment and management of applications within our platform.
-
-![Sequential Diagram](URL_TO_SEQUENTIAL_DIAGRAM)
-
-These visuals provide a clear representation of the project's technical and operational blueprint, facilitating a deeper understanding of its capabilities and design.
 ----------
 Here you can include the diagrams or any other visuals related to your project. Use markdown image syntax to embed images.
 
@@ -101,8 +80,9 @@ Please refer to our [Contribution Guidelines](URL_TO_CONTRIBUTION_GUIDELINES) fo
 
 This project has been developed with contributions from:
 
-- **Jane Doe** - _Initial Work_ - [JaneDoe](https://github.com/JaneDoe)
-- **John Smith** - _Additional Features_ - [JohnSmith](https://github.com/JohnSmith)
+- **mayank vekariya** 
+- **Dileep Varma Rudraraju**
+- **Ali Rayyan Mohammed** 
 
 Special thanks to all the contributors who have invested their time in improving this platform. We also acknowledge [XYZ Organization](URL_TO_ORGANIZATION) for providing resources and support throughout the development.
 
