@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Project Details: {{ project.project_name }}</h1>
+    <dl class="row">
+        <dt class="col-sm-3">Project Name:</dt>
+        <dd class="col-sm-9">{{ project.project_name }}</dd>
+
+        <dt class="col-sm-3">GitHub URL:</dt>
+        <dd class="col-sm-9"><a href="{{ project.github_url }}" target="_blank">{{ project.github_url }}</a></dd>
+
+        <dt class="col-sm-3">Deployed URL:</dt>
+        <dd class="col-sm-9"><a href="{{ project.url }}" target="_blank">{{ project.url }}</a></dd>
+
+        <dt class="col-sm-3">Status:</dt>
+        <dd class="col-sm-9">{{ project.status }}</dd>
+    </dl>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+</div>
+{% endblock %}

@@ -1,24 +1,52 @@
-{% extends "layouts/base.html" %}
-
-{% block title %}Dashboard{% endblock %}
+{% extends "base.html" %}
 
 {% block content %}
-<h1>Dashboard</h1>
-<div>
-    <a href="{{ url_for('main.create_project') }}">Create New Project</a>
-    <a href="{{ url_for('main.clone_project') }}">Clone Project from GitHub</a>
+<div class="container mt-5">
+    <!-- Interactive Buttons and Input Fields -->
+    <div class="row text-center mb-4">
+        <div class="border border-5 col-md-4">
+            <form id="deployFormgit" action="/deploy" method="post">
+                <h2>Clone from GitHub</h2>
+                <input type="text" name="github_repo" class="form-control" placeholder="Enter GitHub URL" id="github-url" required>
+                <button class="btn btn-primary mt-2">start</button>
+            </form>
+        </div>
+        <div class="border border-5 col-md-4">
+            <form id="deployFormfresh" action="/deploy" method="post">
+                <h2>Start Fresh Project</h2>
+                <button class="btn btn-primary mt-2">start</button>
+            </form>
+        </div>
+        <div class="border border-5 col-md-4">
+            <form id="deployFormzip" action="/deploy" method="post">
+                <h2>Upload Project</h2>
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">ZIP only</label>
+                  <input class="form-control" type="file" id="formFile">
+                </div>
+                <button class="btn btn-primary mt-2">start</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Container List -->
+    <div class="container mt-5">
+    <h3>Your Deployed Projects</h3>
+    <ul class="list-group">
+        {% for project in projects %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ project.project_name }}
+            <span>
+                <a href="{{ url_for('main.view_container', id=project.id) }}" class="btn btn-info btn-sm">View</a>
+                <form action="{{ url_for('main.delete_container', id=project.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </span>
+        </li>
+        {% else %}
+        <li class="list-group-item">No projects deployed yet.</li>
+        {% endfor %}
+    </ul>
 </div>
-{% if projects %}
-<ul>
-    {% for project in projects %}
-    <li>
-        {{ project.name }}
-        <a href="{{ url_for('main.open_project', project_id=project.id) }}">Open</a>
-        <a href="{{ url_for('main.delete_project', project_id=project.id) }}">Delete</a>
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No projects found. Start by creating a new project.</p>
-{% endif %}
+</div>
 {% endblock %}
