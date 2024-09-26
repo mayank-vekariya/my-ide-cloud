@@ -84,7 +84,6 @@ This project has been developed with contributions from:
 - **Dileep Varma Rudraraju**
 - **Ali Rayyan Mohammed** 
 
-Special thanks to all the contributors who have invested their time in improving this platform. We also acknowledge [XYZ Organization](URL_TO_ORGANIZATION) for providing resources and support throughout the development.
 
 ## License
 
