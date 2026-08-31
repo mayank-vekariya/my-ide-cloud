@@ -11,6 +11,12 @@ logging.basicConfig(level=logging.INFO)
 main_bp = Blueprint('main', __name__, template_folder='templates/main')
 
 
+@main_bp.route('/healthz', methods=['GET'])
+def healthz():
+    """Liveness only: does not access a database or invoke any cloud command."""
+    return {'status': 'ok', 'service': 'code-server-dashboard'}, 200
+
+
 @main_bp.route('/')
 def home():
     return render_template('main/index.html')
